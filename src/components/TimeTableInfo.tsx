@@ -1,4 +1,4 @@
-import { useState } from "react"
+// import { useState } from "react"
 import { Info } from "../type/Info"
 import { Stage } from "../type/Stage"
 import { Day } from "../type/Day"
@@ -17,7 +17,7 @@ export const TimeTableInfo = ({
   stage,
   info
 }: TimeTableInfoProps): JSX.Element => {
-  const [checkCount, setCheckCount] = useState(localStorage.length)
+  // const [checkCount, setCheckCount] = useState(localStorage.length)
 
   const createHeight = (start: string, end: string) => {
     const startMinute = (Number(start.slice(0, 2)) * 60) + Number(start.slice(2, 4))
@@ -41,7 +41,7 @@ export const TimeTableInfo = ({
     } else {
       localStorage.setItem(key, '1')
     }
-    setCheckCount(localStorage.length)
+    // setCheckCount(localStorage.length)
   }
 
   const checked = (stage: Stage, info: Info) => {
