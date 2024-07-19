@@ -113,35 +113,35 @@ export const TimeTable = (): JSX.Element => {
               className={styles.day}
               htmlFor='day1'
               style={{
-                color: day === 1 ? 'green' : 'white',
-                backgroundColor: '#ff89c4'
+                backgroundColor: '#ff89c4',
+                border: `solid 5px ${day === 1 ? 'green' : '#ff89c4'}`
               }}
             >
-              day1
+              2日
             </label>
             <label
               className={styles.day}
               htmlFor='day2'
               style={{
-                color: day === 2 ? 'green' : 'white',
-                backgroundColor: '#5bbbd8'
+                backgroundColor: '#5bbbd8',
+                border: `solid 5px ${day === 2 ? 'green' : '#5bbbd8'}`
               }}
             >
-              day2
+              3日
             </label>
             <label
               className={styles.day}
               htmlFor='day3'
               style={{
-                color: day === 3 ? 'green' : 'white',
-                backgroundColor: '#89c76c'
+                backgroundColor: '#89c76c',
+                border: `solid 5px ${day === 3 ? 'green' : '#89c76c'}`
               }}
             >
-              day3
+              4日
             </label>
           </div>
           <div className={styles.setting}>
-            
+
           </div>
         </div>
       </div>
