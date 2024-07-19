@@ -2,7 +2,9 @@ import { Info } from "../type/Info"
 import { Stage } from "../type/Stage"
 import { Day } from "../type/Day"
 import styles from "./TimeTableInfo.module.css"
-import React, { useState } from "react"
+import { useState } from "react"
+import { formatTime, getKey } from "../utils/stringUtil"
+import { ArtistText } from "./ArtistText"
 
 const START_TIME = 570
 
@@ -30,12 +32,8 @@ export const TimeTableInfo = ({
     return `${((startMinute - START_TIME) * 5) + 50}px`
   }
 
-  const getKey = (stage: Stage, info: Info) => {
-    return `${day}${stage}${info.start}`
-  }
-
   const handleCheck = (stage: Stage, info: Info) => () => {
-    const key = getKey(stage, info)
+    const key = getKey(day, stage, info)
     if (checked(stage, info)) {
       localStorage.removeItem(key)
     } else {
@@ -45,13 +43,9 @@ export const TimeTableInfo = ({
   }
 
   const checked = (stage: Stage, info: Info) => {
-    const key = getKey(stage, info)
+    const key = getKey(day, stage, info)
     const checked = localStorage.getItem(key)
     return checked != null
-  }
-
-  const formatTime = (start: string, end: string) => {
-    return `${start.slice(0, 2)}:${start.slice(2, 4)}〜${end.slice(0, 2)}:${end.slice(2, 4)}`
   }
 
   return (
@@ -68,11 +62,7 @@ export const TimeTableInfo = ({
       <div>
         <span>{formatTime(info.start, info.end)}</span>
       </div>
-      {info.artist.split('<br>').map((val, index) => (
-        <React.Fragment key={index}>
-          {val}<br/>
-        </React.Fragment>
-      ))}
+      <ArtistText artist={info.artist} />
     </div>
   )
 }

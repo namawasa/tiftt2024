@@ -1,0 +1,19 @@
+.main {
+    border: solid 1px lightgray;
+    border-radius: 5px;
+    background-color: white;
+    margin: 5px;
+    padding: 5px;
+}
+
+.item {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    margin: 5px;
+    color: white;
+}
+
+.stage {
+    font-size: 12px;
+}

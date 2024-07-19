@@ -4,10 +4,14 @@ import { Stage, stages } from '../type/Stage'
 import { TimeTableInfo } from './TimeTableInfo'
 import data from '../timetable2.json'
 import styles from './TimeTable.module.css'
+import { Mode } from '../type/Mode'
+import { TimeTableChecked } from './TimeTableChecked'
+import { getStageColor } from '../utils/stringUtil'
 // import html2canvas from 'html2canvas'
 
 export const TimeTable = (): JSX.Element => {
   const [day, setDay] = useState<Day>(1)
+  const [mode, setMode] = useState<Mode>(1)
   // const [isOpen, setIsOpen] = useState(false)
   // const [capture, setCapture] = useState<string | undefined>(undefined)
 
@@ -41,27 +45,12 @@ export const TimeTable = (): JSX.Element => {
     }
   }
 
-  const getStageColor = (stage: Stage) => {
-    switch (stage) {
-      case 'HOT STAGE':
-        return '#fa6c6c'
-      case 'HEAT GARAGE':
-        return '#ff9c26'
-      case 'SMILE GARDEN':
-        return '#b1d502'
-      case 'DOLL FACTORY':
-        return '#39c960'
-      case 'SKY STAGE':
-        return '#6dc8f9'
-      case 'DREAM STAGE':
-        return '#5f6ade'
-      case '浮島STAGE':
-        return '#f2bb01'
-    }
-  }
-
   const handleChangeDay = (e: React.ChangeEvent<HTMLInputElement>) => {
     setDay(Number(e.target.value) as Day)
+  }
+
+  const handleChangeMode = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMode(Number(e.target.value) as Mode)
   }
 
   // const save = () => {
@@ -84,26 +73,31 @@ export const TimeTable = (): JSX.Element => {
   return (
     <>
       <div className={styles.main}>
-        <div id='stages' className={styles.stages}>
-          {stages.map(stage => (
-            <div key={stage} className={styles.stage} style={{ backgroundColor: getStageColor(stage) }}>
-              <div
-                className={styles.header}
-                style={{ backgroundColor: getStageColor(stage) }}
-              >
-                <span>{stage}</span>
+        {mode === 1 &&
+          <div id='stages' className={styles.stages}>
+            {stages.map(stage => (
+              <div key={stage} className={styles.stage} style={{ backgroundColor: getStageColor(stage) }}>
+                <div
+                  className={styles.header}
+                  style={{ backgroundColor: getStageColor(stage) }}
+                >
+                  <span>{stage}</span>
+                </div>
+                {getInfo(stage as Stage).map((info, index) => (
+                  <TimeTableInfo
+                    key={index}
+                    day={day}
+                    stage={stage as Stage}
+                    info={info}
+                  />
+                ))}
               </div>
-              {getInfo(stage as Stage).map((info, index) => (
-                <TimeTableInfo
-                  key={index}
-                  day={day}
-                  stage={stage as Stage}
-                  info={info}
-                />
-              ))}
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        }
+        {mode === 2 &&
+            <TimeTableChecked day={day} />
+        }
         <div className={styles.footer}>
           <div className={styles.days}>
             <input type="radio" id='day1' name='day' value={1} onChange={handleChangeDay} checked={day === 1} />
@@ -141,7 +135,28 @@ export const TimeTable = (): JSX.Element => {
             </label>
           </div>
           <div className={styles.setting}>
-
+            <input type="radio" id='modeAll' name='mode' value={1} onChange={handleChangeMode} checked={mode === 1} />
+            <input type="radio" id='modeChecked' name='mode' value={2} onChange={handleChangeMode} checked={mode === 2} />
+            <label
+              className={styles.mode}
+              htmlFor='modeAll'
+              style={{
+                backgroundColor: 'white',
+                border: `solid 5px ${mode === 1 ? 'green' : 'white'}`
+              }}
+            >
+              ALL
+            </label>
+            <label
+              className={styles.mode}
+              htmlFor='modeChecked'
+              style={{
+                backgroundColor: 'white',
+                border: `solid 5px ${mode === 2 ? 'green' : 'white'}`
+              }}
+            >
+              選択済
+            </label>
           </div>
         </div>
       </div>
