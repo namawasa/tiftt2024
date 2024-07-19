@@ -22,7 +22,6 @@ input[type='radio'] {
     bottom: 0;
     width: 100%;
     height: 60px;
-    background-color: white;
 }
 
 .days {
@@ -47,6 +46,7 @@ input[type='radio'] {
     justify-content: center;
     font-size: 24px;
     color: white;
+    border-radius: 12px;
 }
 
 .setting {
@@ -67,11 +67,14 @@ input[type='radio'] {
     justify-content: center;
     font-size: 24px;
     color: black;
+    border-radius: 12px;
+    background-color: lightgray;
 }
 
 .screenshot {
     width: 60px;
     height: 100%;
+    border-radius: 12px;
 }
 
 .stages {

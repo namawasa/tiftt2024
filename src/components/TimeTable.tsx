@@ -9,6 +9,8 @@ import { TimeTableChecked } from './TimeTableChecked'
 import { getStageColor } from '../utils/stringUtil'
 import { useScreenShot } from '../hooks/useScreenShot'
 import { RiScreenshot2Fill } from 'react-icons/ri'
+import { IoMdListBox } from 'react-icons/io'
+import { FaCheck } from 'react-icons/fa'
 
 export const TimeTable = (): JSX.Element => {
   const [day, setDay] = useState<Day>(1)
@@ -155,21 +157,19 @@ export const TimeTable = (): JSX.Element => {
               className={styles.mode}
               htmlFor='modeAll'
               style={{
-                backgroundColor: 'white',
                 border: `solid 5px ${mode === 1 ? 'green' : 'white'}`
               }}
             >
-              ALL
+              <IoMdListBox size="36px" />
             </label>
             <label
               className={styles.mode}
               htmlFor='modeChecked'
               style={{
-                backgroundColor: 'white',
                 border: `solid 5px ${mode === 2 ? 'green' : 'white'}`
               }}
             >
-              選択済
+              <FaCheck size="36px" />
             </label>
           </div>
         </div>
