@@ -1,8 +1,8 @@
-// import { useState } from "react"
 import { Info } from "../type/Info"
 import { Stage } from "../type/Stage"
 import { Day } from "../type/Day"
 import styles from "./TimeTableInfo.module.css"
+import React, { useState } from "react"
 
 const START_TIME = 570
 
@@ -17,7 +17,7 @@ export const TimeTableInfo = ({
   stage,
   info
 }: TimeTableInfoProps): JSX.Element => {
-  // const [checkCount, setCheckCount] = useState(localStorage.length)
+  const [, setCheckCount] = useState(localStorage.length)
 
   const createHeight = (start: string, end: string) => {
     const startMinute = (Number(start.slice(0, 2)) * 60) + Number(start.slice(2, 4))
@@ -41,7 +41,7 @@ export const TimeTableInfo = ({
     } else {
       localStorage.setItem(key, '1')
     }
-    // setCheckCount(localStorage.length)
+    setCheckCount(localStorage.length)
   }
 
   const checked = (stage: Stage, info: Info) => {
@@ -68,7 +68,11 @@ export const TimeTableInfo = ({
       <div>
         <span>{formatTime(info.start, info.end)}</span>
       </div>
-      <span>{info.artist}</span>
+      {info.artist.split('<br>').map((val, index) => (
+        <React.Fragment key={index}>
+          {val}<br/>
+        </React.Fragment>
+      ))}
     </div>
   )
 }

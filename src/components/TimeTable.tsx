@@ -104,40 +104,45 @@ export const TimeTable = (): JSX.Element => {
             </div>
           ))}
         </div>
-        <div className={styles.days}>
-          <input type="radio" id='day1' name='day' value={1} onChange={handleChangeDay} checked={day === 1} />
-          <input type="radio" id='day2' name='day' value={2} onChange={handleChangeDay} checked={day === 2} />
-          <input type="radio" id='day3' name='day' value={3} onChange={handleChangeDay} checked={day === 3} />
-          <label
-            className={styles.day}
-            htmlFor='day1'
-            style={{
-              color: day === 1 ? 'green' : 'white',
-              backgroundColor: '#ff89c4'
-            }}
-          >
-            day1
-          </label>
-          <label
-            className={styles.day}
-            htmlFor='day2'
-            style={{
-              color: day === 2 ? 'green' : 'white',
-              backgroundColor: '#5bbbd8'
-            }}
-          >
-            day2
-          </label>
-          <label
-            className={styles.day}
-            htmlFor='day3'
-            style={{
-              color: day === 3 ? 'green' : 'white',
-              backgroundColor: '#89c76c'
-            }}
-          >
-            day3
-          </label>
+        <div className={styles.footer}>
+          <div className={styles.days}>
+            <input type="radio" id='day1' name='day' value={1} onChange={handleChangeDay} checked={day === 1} />
+            <input type="radio" id='day2' name='day' value={2} onChange={handleChangeDay} checked={day === 2} />
+            <input type="radio" id='day3' name='day' value={3} onChange={handleChangeDay} checked={day === 3} />
+            <label
+              className={styles.day}
+              htmlFor='day1'
+              style={{
+                color: day === 1 ? 'green' : 'white',
+                backgroundColor: '#ff89c4'
+              }}
+            >
+              day1
+            </label>
+            <label
+              className={styles.day}
+              htmlFor='day2'
+              style={{
+                color: day === 2 ? 'green' : 'white',
+                backgroundColor: '#5bbbd8'
+              }}
+            >
+              day2
+            </label>
+            <label
+              className={styles.day}
+              htmlFor='day3'
+              style={{
+                color: day === 3 ? 'green' : 'white',
+                backgroundColor: '#89c76c'
+              }}
+            >
+              day3
+            </label>
+          </div>
+          <div className={styles.setting}>
+            
+          </div>
         </div>
       </div>
       {/* <dialog id='dialog'>
