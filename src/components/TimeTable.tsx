@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { createRef, useEffect, useState } from 'react'
 import { Day } from '../type/Day'
 import { Stage, stages } from '../type/Stage'
 import { TimeTableInfo } from './TimeTableInfo'
@@ -7,13 +7,15 @@ import styles from './TimeTable.module.css'
 import { Mode } from '../type/Mode'
 import { TimeTableChecked } from './TimeTableChecked'
 import { getStageColor } from '../utils/stringUtil'
-// import html2canvas from 'html2canvas'
+import { useScreenShot } from '../hooks/useScreenShot'
+import { RiScreenshot2Fill } from 'react-icons/ri'
 
 export const TimeTable = (): JSX.Element => {
   const [day, setDay] = useState<Day>(1)
   const [mode, setMode] = useState<Mode>(1)
-  // const [isOpen, setIsOpen] = useState(false)
-  // const [capture, setCapture] = useState<string | undefined>(undefined)
+  const refMode1 = createRef<HTMLDivElement>()
+  const refMode2 = createRef<HTMLDivElement>()
+  const { image, takeScreenShot, error } = useScreenShot()
 
   const getSelectedDayInfo = () => {
     switch (day) {
@@ -53,28 +55,35 @@ export const TimeTable = (): JSX.Element => {
     setMode(Number(e.target.value) as Mode)
   }
 
-  // const save = () => {
-  //   const element = document.getElementById('stages') as HTMLElement
-  //   element.removeAttribute('style')
-  //   html2canvas(element).then(canvas => {
-  //     setCapture(canvas.toDataURL())
-  //     const dialogElem = document.getElementById('dialog') as HTMLDialogElement
-  //     dialogElem.showModal()
-  //   }).finally(() => {
-  //     element.setAttribute('style', 'overflow-x: scroll;')
-  //   })
-  // }
+  const handleClickScreenShot = async () => {
+    let node = null as HTMLElement | null
+    if (mode === 1) {
+      node = refMode1.current
+    }
+    if (mode === 2) {
+      node = refMode2.current
+    }
 
-  // const dialogClose = () => {
-  //   const dialogElem = document.getElementById('dialog') as HTMLDialogElement
-  //   dialogElem.close()
-  // }
+    await takeScreenShot(node)
+  }
+
+  useEffect(() => {
+    if (image == null) return
+    const a = document.createElement('a')
+    a.href = image
+    a.download = 'ttt24.png'
+    a.click()
+  }, [image])
+
+  useEffect(() => {
+    if (error) alert('エラーが発生しました。')
+  }, [error])
 
   return (
     <>
       <div className={styles.main}>
         {mode === 1 &&
-          <div id='stages' className={styles.stages}>
+          <div id='stages' className={styles.stages} ref={refMode1}>
             {stages.map(stage => (
               <div key={stage} className={styles.stage} style={{ backgroundColor: getStageColor(stage) }}>
                 <div
@@ -96,7 +105,9 @@ export const TimeTable = (): JSX.Element => {
           </div>
         }
         {mode === 2 &&
+          <div ref={refMode2}>
             <TimeTableChecked day={day} />
+          </div>
         }
         <div className={styles.footer}>
           <div className={styles.days}>
@@ -135,6 +146,9 @@ export const TimeTable = (): JSX.Element => {
             </label>
           </div>
           <div className={styles.setting}>
+            <button className={styles.screenshot} onClick={handleClickScreenShot}>
+              <RiScreenshot2Fill size="36px" />
+            </button>
             <input type="radio" id='modeAll' name='mode' value={1} onChange={handleChangeMode} checked={mode === 1} />
             <input type="radio" id='modeChecked' name='mode' value={2} onChange={handleChangeMode} checked={mode === 2} />
             <label
@@ -160,10 +174,6 @@ export const TimeTable = (): JSX.Element => {
           </div>
         </div>
       </div>
-      {/* <dialog id='dialog'>
-        <img src={capture} width='500px' height='500px' />
-        <button onClick={dialogClose}>閉じる</button>
-      </dialog> */}
     </>
   );
 }
