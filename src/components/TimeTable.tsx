@@ -121,7 +121,7 @@ export const TimeTable = (): JSX.Element => {
               htmlFor='day1'
               style={{
                 backgroundColor: '#ff89c4',
-                border: `solid 5px ${day === 1 ? 'green' : '#ff89c4'}`
+                border: `solid 5px ${day === 1 ? 'blue' : 'white'}`
               }}
             >
               2日
@@ -131,7 +131,7 @@ export const TimeTable = (): JSX.Element => {
               htmlFor='day2'
               style={{
                 backgroundColor: '#5bbbd8',
-                border: `solid 5px ${day === 2 ? 'green' : '#5bbbd8'}`
+                border: `solid 5px ${day === 2 ? 'blue' : 'white'}`
               }}
             >
               3日
@@ -141,7 +141,7 @@ export const TimeTable = (): JSX.Element => {
               htmlFor='day3'
               style={{
                 backgroundColor: '#89c76c',
-                border: `solid 5px ${day === 3 ? 'green' : '#89c76c'}`
+                border: `solid 5px ${day === 3 ? 'blue' : 'white'}`
               }}
             >
               4日
@@ -157,7 +157,7 @@ export const TimeTable = (): JSX.Element => {
               className={styles.mode}
               htmlFor='modeAll'
               style={{
-                border: `solid 5px ${mode === 1 ? 'green' : 'white'}`
+                border: `solid 5px ${mode === 1 ? 'blue' : 'white'}`
               }}
             >
               <IoMdListBox size="36px" />
@@ -166,7 +166,7 @@ export const TimeTable = (): JSX.Element => {
               className={styles.mode}
               htmlFor='modeChecked'
               style={{
-                border: `solid 5px ${mode === 2 ? 'green' : 'white'}`
+                border: `solid 5px ${mode === 2 ? 'blue' : 'white'}`
               }}
             >
               <FaCheck size="36px" />
