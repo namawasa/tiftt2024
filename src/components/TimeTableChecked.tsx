@@ -9,10 +9,12 @@ import { ArtistText } from "./ArtistText"
 
 type TimeTableCheckedProps = {
   day: Day
+  name?: string
 }
 
 export const TimeTableChecked = ({
-  day
+  day,
+  name
 }: TimeTableCheckedProps): JSX.Element => {
 
   type DataItem = {
@@ -60,7 +62,7 @@ export const TimeTableChecked = ({
   return (
     <div className={styles.main}>
       <div className={styles.item}>
-        <span className={styles['day' + day]}>{day + 1}日</span>
+        <span className={styles['day' + day]}>{day + 1}日 {name}</span>
       </div>
       {checkedDatas().map(item => {
         if (day !== item.day) return <></>

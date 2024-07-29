@@ -18,6 +18,7 @@ export const TimeTable = (): JSX.Element => {
   const refMode1 = createRef<HTMLDivElement>()
   const refMode2 = createRef<HTMLDivElement>()
   const { image, takeScreenShot, error } = useScreenShot()
+  const [name, setName] = useState('')
 
   const getSelectedDayInfo = () => {
     switch (day) {
@@ -108,16 +109,15 @@ export const TimeTable = (): JSX.Element => {
         }
         {mode === 2 &&
           <div ref={refMode2}>
-            <TimeTableChecked day={day} />
+            <TimeTableChecked day={day} name={name} />
           </div>
         }
         <div className={styles.footer}>
-          <div className={styles.days}>
             <input type="radio" id='day1' name='day' value={1} onChange={handleChangeDay} checked={day === 1} />
             <input type="radio" id='day2' name='day' value={2} onChange={handleChangeDay} checked={day === 2} />
             <input type="radio" id='day3' name='day' value={3} onChange={handleChangeDay} checked={day === 3} />
             <label
-              className={styles.day}
+              className={styles.footerItem}
               htmlFor='day1'
               style={{
                 backgroundColor: '#ff89c4',
@@ -127,7 +127,7 @@ export const TimeTable = (): JSX.Element => {
               2日
             </label>
             <label
-              className={styles.day}
+              className={styles.footerItem}
               htmlFor='day2'
               style={{
                 backgroundColor: '#5bbbd8',
@@ -137,7 +137,7 @@ export const TimeTable = (): JSX.Element => {
               3日
             </label>
             <label
-              className={styles.day}
+              className={styles.footerItem}
               htmlFor='day3'
               style={{
                 backgroundColor: '#89c76c',
@@ -146,15 +146,13 @@ export const TimeTable = (): JSX.Element => {
             >
               4日
             </label>
-          </div>
-          <div className={styles.setting}>
             <button className={styles.screenshot} onClick={handleClickScreenShot}>
               <RiScreenshot2Fill size="36px" />
             </button>
             <input type="radio" id='modeAll' name='mode' value={1} onChange={handleChangeMode} checked={mode === 1} />
             <input type="radio" id='modeChecked' name='mode' value={2} onChange={handleChangeMode} checked={mode === 2} />
             <label
-              className={styles.mode}
+              className={styles.footerItem}
               htmlFor='modeAll'
               style={{
                 border: `solid 5px ${mode === 1 ? 'blue' : 'white'}`
@@ -163,7 +161,7 @@ export const TimeTable = (): JSX.Element => {
               <IoMdListBox size="36px" />
             </label>
             <label
-              className={styles.mode}
+              className={styles.footerItem}
               htmlFor='modeChecked'
               style={{
                 border: `solid 5px ${mode === 2 ? 'blue' : 'white'}`
@@ -171,7 +169,13 @@ export const TimeTable = (): JSX.Element => {
             >
               <FaCheck size="36px" />
             </label>
-          </div>
+            <input
+              type="text"
+              value={name}
+              className={styles.name}
+              placeholder="メモ"
+              onChange={(ex) => setName(ex.target.value)}
+            />
         </div>
       </div>
     </>
