@@ -59,6 +59,9 @@ export const TimeTableChecked = ({
 
   return (
     <div className={styles.main}>
+      <div className={styles.item}>
+        <span className={styles['day' + day]}>{day + 1}日</span>
+      </div>
       {checkedDatas().map(item => {
         if (day !== item.day) return <></>
         return (
